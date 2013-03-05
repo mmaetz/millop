@@ -1,0 +1,167 @@
+\chapter{Maths}
+\section{Equation formats}
+\section{align}
+Align to the $=$
+\begin{align*}
+	a&=b\\
+	\leadsto caoeuuu&=d
+\end{align*}
+Something like this looks confusing
+\begin{align*}
+	&a=b\\
+	&\leadsto aoeuou=d
+\end{align*}
+\section{Integrals}
+Needs fix. Need to put the right negative space to make it look right. Put a grid in background in some way.
+\subsection{Simple integral}
+\begin{dgroup}[]
+	\begin{dmath}[]
+		\int_{}^{}\td x \, x=x^{2}
+	\end{dmath}
+	\begin{dmath}[]
+		\int_{0}^{1}\! \td x\, x=1
+	\end{dmath}
+	\begin{dmath}[]
+		\int_{}^{}\td x \, x=x^{2}
+	\end{dmath}
+	\begin{dmath}[]
+		\int_{0}^{10}\! \td x\, x=100
+	\end{dmath}
+	\begin{dmath}[]
+		\int_{}^{}\td x \, x=x^{2}
+	\end{dmath}
+	\begin{dmath}[]
+		\int_{0}^{100}\! \td x\, x=100
+	\end{dmath}
+\end{dgroup}
+\newpage
+\subsection{With fractions}
+Use thick space between two roman variables or between a roman variable and a fraction.
+\begin{dgroup*}[]
+	\begin{dmath}[]
+		\int_{}^{}\td^{3}\mathbf{r}\;\mathbf{j}\left( \mathbf{r},t \right)=\int_{}^{}\td^{3}\mathbf{r}\; \frac{1}{2m}\left[ \psi^{*}\left( -i\hbar\nabla \right)\psi+\psi\left( i\hbar\nabla \right)\psi^{*} \right]
+	\end{dmath}
+	%\begin{dmath}[]
+	%	\delimitershortfall=-1pt
+	%	\int_{}^{}\td^{3}\mathbf{r}\;\mathbf{j}\left( \mathbf{r},t \right)=\int_{}^{}\td^{3}\mathbf{r}\; \frac{1}{2m}\left[ \psi^{*}\left( -i\hbar\nabla \right)\psi+\psi\left( i\hbar\nabla \right)\psi^{*} \right]
+	%\end{dmath}
+	\begin{dmath}[]
+			\int_{}^{}\td^{3}\mathbf{r}\;\mathbf{j}\left( \mathbf{r},t \right)=\int_{}^{}\td^{3}\mathbf{r}\; \frac{1}{2m}\left[ \psi^{*}\left( -i\hbar\nabla \right)\psi+\psi\left( i\hbar\nabla \right)\psi^{*} \right]
+	\end{dmath}
+\end{dgroup*}
+
+\subsection{Multiple integrals}
+\begin{dmath}[]
+	\iiint\limits_{V}\td V\,\boldsymbol{\mathrm\nabla}\cdot F = \iint\limits_{S}\td S\, F
+\end{dmath}
+\section{Derivatives}
+\begin{dgroup}[]
+	\begin{dmath}[]
+		\dd{}{x}x^{2}=x
+	\end{dmath}
+\end{dgroup}
+\section{Functions}
+Examples of separations and their importance.
+\begin{dgroup}[]
+	\begin{dmath}[]
+		\sin 2\pi\cos\theta = 0
+	\end{dmath}
+	\begin{dmath}[compact]
+		\sin\left( \theta x \right)=\sin\theta x\neq \sin\theta \, x=\sin\left( \theta \right)x
+	\end{dmath}
+\end{dgroup}
+\section{Multiplications}
+\begin{dgroup}[]
+	\begin{dmath}[]
+		1\cdot 1
+	\end{dmath}
+	\begin{dmath}[]
+		1 \! \cdot\! 1
+	\end{dmath}
+	\begin{dmath}[]
+		1\cdot 1
+	\end{dmath}
+	\begin{dmath}[]
+		0\cdot 0
+	\end{dmath}
+	\begin{dmath}[]
+		x\cdot x
+	\end{dmath}
+	\begin{dmath}[]
+		\boldsymbol{\mathrm\nabla} \cdot x
+	\end{dmath}
+	\begin{dmath}[]
+		x \!\cdot\! x
+	\end{dmath}
+	\begin{dmath}[]
+		\boldsymbol{\mathrm\nabla}\!\cdot\! x
+	\end{dmath}
+\end{dgroup}
+\section{Hyphen}
+\section{Braces}
+I recommend using dynamic sized braces like $\left(  \right)$. However when two nested braces have the same size the readability is increased if the exterior brace has a bigger size. It is very important if the nested braces are just next to each other. One possibility is to add a vphantom and don't forget to put a $\!$ if needed.
+\begin{align}
+ \int \td^3 \vec r \; \vec j(\vec r , t)  &= \int \td^3\vec r \; \frac{1}{2m} \left[ \!\vphantom{A^{A}}
+ \braket{\psi, t }{\vec r} \sand{\vec r}{\vec p}{ \psi, t}
+ + 
+ \sand{ \psi, t}{\vec p}{\vec r} \braket {\vec r}{\psi, t }
+ \right] 
+\end{align} 
+Without the vphantom:
+\begin{align}
+ \int \td^3 \vec r \; \vec j(\vec r , t)  &= \int \td^3\vec r \; \frac{1}{2m} \left[ 
+ \braket{\psi, t }{\vec r} \sand{\vec r}{\vec p}{ \psi, t}
+ + 
+ \sand{ \psi, t}{\vec p}{\vec r} \braket {\vec r}{\psi, t }
+ \right] 
+\end{align} 
+Alternative with %\delimitershortfall=-1pt and \mathinner
+
+
+\section{Prime}
+$A'$ and $A^{\prime}$ look exactly the same.
+\section{Square root}
+\section{Matrix}
+When there is an underbrace under the matrix, one needs a $\!$ on both sides
+\begin{dgroup*}[]
+	\begin{dmath}[]
+		\underbrace{\!
+			\begin{pmatrix}
+				1&2\\
+				3&4
+			\end{pmatrix}
+		\!}_{blabla}
+		=
+		\begin{pmatrix}
+			5&6\\
+			7&8
+		\end{pmatrix}
+	\end{dmath}
+	\begin{dmath}[]
+		\underbrace{
+			\begin{pmatrix}
+				1&2\\
+				3&4
+			\end{pmatrix}
+		}_{blabla}
+		=
+		\begin{pmatrix}
+			5&6\\
+			7&8
+		\end{pmatrix}
+	\end{dmath}
+\end{dgroup*}
+\begin{dmath}[]
+	\begin{pmatrix}
+		\hdotsfor{3}\\
+		\ldots&1&\ldots\\
+		\hdotsfor{3}
+	\end{pmatrix}
+\end{dmath}
+\section{Miscellaneous}
+\begin{enumerate}[i)]
+	\item Use $\ell$ instead of $l$. Increases readability.
+	\item $\xrightarrow{T}$ instead of $\stackrel{T}{\rightarrow}$
+	\item $\ddots$
+\end{enumerate}
+

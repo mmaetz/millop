@@ -1,0 +1,196 @@
+%%%\documentclass[paper,notoc,12pt]{JHEP3}
+%%%mmaetz: put a4paper
+\documentclass[a5paper]{book}
+%%%\documentclass[12pt,a4paper,openany]{memoir}
+%%%mmaetz: reduce margins
+%%%mmaetz: omitted temporarily to have the margins for the change remarks.
+\usepackage[a5paper,left=2cm, right=1cm,top=1.5cm, bottom=1.5cm]{geometry}
+%mmaetz: use tikz package
+\usepackage{tikz,pgflibraryshapes}
+%\usepackage[headings,cm]{fullpage}
+\usetikzlibrary{positioning,calc,matrix,chains,scopes,fit,decorations,decorations.pathmorphing,decorations.pathreplacing,arrows,patterns}
+\usepackage[utf8]{inputenc}
+
+\usepackage{epsfig,cite,amsmath}
+\usepackage{amsbsy} 
+\usepackage{graphicx}
+%\usepackage{axodraw}
+\usepackage{pstricks}
+\usepackage{color}
+\usepackage{latexsym}
+%%% mmaetz packages
+%%% Theorems like Theorem 3.1, proof environment
+\usepackage{amsthm}
+%%% Using this packages numbers with units are always typed correctly.
+\usepackage{siunitx}
+%%% To cross out some stuff.
+\usepackage{cancel}
+%%% To have an enumerate environment with options to get like.
+%%% i) bla
+%%% ii) lala
+%%% typing just \item
+\usepackage{enumerate}
+%%% To use \bm\mathrm instead of \vec one needs the appropriate greek letters
+\usepackage{upgreek}
+%%% bold math
+\usepackage{bm}
+%%% Nice tabular
+\usepackage{booktabs}
+%%% For delimgrowth, have nice nested braces. Doesn't work well with AMSmath. :/
+%\usepackage{nath}
+%\delimgrowth=1
+\usepackage{amsbsy}
+%%% To change the headers. (Coming soon)
+\newcommand{\changefont}{%
+	\fontsize{9}{11}\selectfont
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LE]{\changefont\slshape \rightmark} %section
+\fancyhead[RE]{\thepage}
+\fancyhead[RO]{\changefont\slshape \leftmark} % chapter
+\fancyhead[LO]{\thepage}
+\fancyfoot[C]{}
+
+%%% To use mathclap.
+\usepackage{mathtools}
+%%% mmaetz: This is for the change notes
+%\usepackage[deletedmarkup=none]{changes}
+%%% Use this option instead of the above one to make the red stuff disappear and the blue stuff become black. (And also remove the footnotes done with the change package.)
+%%% Below are the options used for the change package. Note that the default is to cross out the deleted stuff but this doesn't work well in a math environment so the default settings have been changede.
+%\usepackage[deletedmarkup=none,final]{changes}
+%\setdeletedmarkup{\textcolor{red!75!black}{#1}}
+%\setauthormarkupposition{left}
+%\setremarkmarkup{\footnote{#1: \textcolor{Changes@Color#1}{#2}}}
+%\setremarkmarkup{\marginpar{#1:#2}}
+%%% mmaetz: To suppress the change notes put the final option like that:
+%\usepackage[final]{changes}
+%%% mmaetz: I'm using an authors id
+%\definechangesauthor[name={Marc Maetz},color=blue!50!black]{MM}
+%\definechangesauthor[name={Peter Strassmann},color=red!50!black]{PS}
+
+%%% mmaetz: Can be useful for something but forgot what and I'm not using it here.
+%\usepackage{etoolbox}
+%%% mmaetz: Just discovered breqn which provides automatic line breaking. Very nice, more powerful but requires a bit of getting used to it.
+%%% flexisym is needed by breqn
+\usepackage{flexisym}
+\usepackage{breqn}
+%%% To make the references clickable
+%%% The color settings are in the tikzstuff.tex file.
+\usepackage{hyperref}
+
+%\hypersetup{colorlinks=false,linkbordercolor=gray}
+
+%%% mmaetz: See this as a suggestion. This can be changed back any time.
+\renewcommand{\vec}[1]{\bm{\mathrm#1}}
+%\renewcommand{\vec}[1]{\mathbf#1}
+%\StrLeft{#1}{8}
+%\renewcommand{\vec}[1]{\IfStrEqCase{\StrLeft{#1}{8}}{{\mathcal}{\bm{#1}}}[\bm{\mathrm#1}]}
+%\newcommand{\bvec}[1]{\bm{#1}}
+%%%
+\newcommand{\s}{\ensuremath{\;}}
+\newcommand{\lag}{\ensuremath{\cal L}}
+\newcommand{\dslash}{\ensuremath{\displaystyle{\not}}}
+\newcommand{\Ta}{\ensuremath{\tilde T}}
+
+%\newcommand{\ket}[1]{\ensuremath{\left| {#1} \right>}}
+%\newcommand{\bra}[1]{\ensuremath{\left< {#1} \right|}}
+%\newcommand{\braket}[2]{\ensuremath{\left< {#1} \, \right| \left. {#2} \right>}}
+%\newcommand{\ketbra}[2]{\ensuremath{ {\ket{#1} \bra{#2}}}}
+%\newcommand{\proj}[1]{\ensuremath{ {\ket{#1} \bra{#1}}}}
+%\newcommand{\sumproj}[1]{\ensuremath{ {\sum_{#1}\proj{#1}}}}
+%\newcommand{\sand}[3]{\ensuremath{\left< {#1} \right|{#2} \left|{#3}\right>}}
+%mmaetz: breqn doesn't like \left< and \right> so I rewrite your macros:
+\newcommand{\ket}[1]{\ensuremath{\left\lvert {#1} \right\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle {#1} \right\rvert}}
+%mmaetz: Added negative thin space, added vphantom (makes both sides of the braket of the same size in all cases)
+\newcommand{\braket}[2]{\ensuremath{\left\langle {#1}\vphantom{#2} \, \right\rvert \left.\! {#2}\vphantom{#1} \right\rangle}}
+\newcommand{\ketbra}[2]{\ensuremath{ {\ket{#1} \bra{#2}}}}
+\newcommand{\proj}[1]{\ensuremath{ {\ket{#1} \bra{#1}}}}
+\newcommand{\sumproj}[1]{\ensuremath{ {\sum_{#1}\proj{#1}}}}
+\newcommand{\sand}[3]{\ensuremath{\left\langle {#1}\vphantom{#3} \right\rvert{#2} \left\lvert{#3}\vphantom{#1}\right\rangle}}
+
+
+\newcommand{\vevj}[2]{\left\langle {#1} \right\langle_{#2} }
+\newcommand{\vev}[1]{\left\langle {#1} \right\rangle }
+
+
+\newcommand{\comm}[2]{\left[ {#1}, {#2} \right] }
+\newcommand{\acomm}[2]{\left\{ {#1}, {#2} \right\} }
+
+\newcommand{\norm}[1]{\left\lvert {#1} \right\rvert }
+
+%%% mmaetz: For the differential.
+\newcommand{\td}{\mathrm d }
+
+%%% Theorems. (Copied from www.mitschriften.ethz.ch template)
+\newtheorem{expl}{Example}[chapter]
+\newtheorem{remk}{Remark}[chapter]
+\newtheorem{corl}{Corollary}[chapter]
+\newtheorem{thrm}{Theorem}[chapter]
+\newtheorem{exer}{Exercise}[chapter]
+%%% calculus: (Part of what I found some time ago somewhere in the internet.)
+\newcommand{\ddd}[2]{\frac{\mathrm d ^{2} #1}{\mathrm d #2 ^{2}}}
+\newcommand{\dd}[2]{\frac{\mathrm d #1}{\mathrm d #2}}
+\newcommand{\ddn}[3]{\frac{\mathrm d ^{#1} #2}{\mathrm d #3 ^{#1}}}
+\newcommand{\pdd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pddd}[2]{\frac{\partial^{2} #1}{\partial #2 ^{2}}}
+\newcommand{\pdddm}[3]{\frac{\partial^{2} #1}{\partial #2 \partial #3}}
+\newcommand{\pddn}[3]{\frac{\partial^{#1} #2}{\partial #3 ^{#1}}}
+
+
+
+
+%\title{\boldmath The \LaTeX for physicits project}
+\title{Millop improves \LaTeX~ level of physicists}
+
+
+\author{Marc Maetz\\
+  Institute of \LaTeX, \\ 
+  ETH Zurich,\\
+  8093 Zurich, Switzerland\\
+  E-mail: {\em mmaetz@student.ethz.ch}}
+
+\begin{document} 
+%%% Color settings and plot settings. If the pictures look bad look at this file!
+
+\maketitle
+
+
+%\begin{abstract}
+%The subject of the course an  introduction to  quantum 
+%field theory. The following topics are discussed: 
+%\begin{itemize}
+%\item Theory of classical fields.  
+%\item Canonical quantization of free fields.
+%\item The  Dirac equation and  quantization of the Dirac field
+%\item Field Propagation, interacting fields and perturbation theory. 
+%\item Cross-sections  and decay rates.
+%\item Introduction to QED and the problem of infinities.
+%\item One-loop renormalization of QED. 
+%\end{itemize}
+%\end{abstract}
+
+\tableofcontents 
+%\listofchanges
+\bibliographystyle{JHEP}
+\begin{thebibliography}{10}
+%\bibitem{srednicki}
+%Modern Quantum Mechanics, Sakurai 
+%\bibitem{sterman}
+%The Feynman Lectures in Physics, Feynman 
+\end{thebibliography} 
+\input{intro.tex}
+\input{math.tex}  
+\input{templates.tex}  
+\input{useful-packages.tex}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+% LocalWords:  asimple
